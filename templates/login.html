@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Notes
+{% endblock %}
+{%block head%}
+<ul class="topnav">
+	<li id="hd"><strong>Project 1: Books</strong></li>
+</ul>
+{%endblock%}
+{% block body %}
+<div class="Form">
+	
+		<form action=" {{ url_for('login') }} " method="post">
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input class="form-control" type="text" name="username">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input class="form-control" type="password" name="password">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
+		</form>
+		<div class="form-group">
+			    Don't have an account?<a style="text-decoration: none" href="{{ url_for('register')}}" >Sign up</a>
+
+		</div>
+</div>
+
+{% endblock %}

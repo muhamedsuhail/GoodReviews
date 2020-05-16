@@ -1,0 +1,32 @@
+{%extends "layout.html"%}
+{%block title%}
+	Dashboard
+{%endblock%}
+{%block head%}
+<ul class="topnav">
+	<li id="hd">Project 1: Books</li>
+	<li><a href="/" id="logout">Logout</a></li>
+	<li id="Welcome">{{user}}</li>
+</ul> 
+{%endblock%}
+{%block body%}
+
+
+	<div id= "search" class="form-group">
+		<form action="{{url_for('index')}}" method="post">
+			<input type="text" name="search" placeholder="Search..">
+		</form>
+	</div>
+	<div class="container">
+		{%for book in books%}
+			<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+			  <div class="card-header"><strong>{{book.title}}</strong></div>
+			  <div class="card-body">
+			    <h7 class="card-title">{{book.isbn}}</h7>
+			    <h5 class="card-title">{{book.author}}</h5>
+			    <p class="card-text">{{book.year}}</p>
+			  </div>
+			</div>
+		{%endfor%}
+	</div>
+{%endblock%}

@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block title%}
+Error
+{%endblock%}
+{%block head%}
+<ul class="topnav">
+	<li id="hd">Project 1: Books</li>
+	<li><a href="/" id="logout">Logout</a></li>
+	<li id="Welcome">{{user}}</li>
+</ul> 
+{%endblock%}
+{%block body%}
+<div class="Error">{{message}}</div>
+{%endblock%}
