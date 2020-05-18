@@ -39,7 +39,7 @@ def login():
 	if password==passw[0]:
 		session["uname"]=name #login as user "name"
 		flash(f"Successfully logged in as {name}",'success')
-		return redirect("/home")
+		return redirect("/search")
 	else:
 		flash("Incorrect password",'danger')
 		return render_template("login.html")
@@ -63,14 +63,19 @@ def register():
 	db.execute("INSERT INTO users (username,password) VALUES(:name,:password)",{"name":name,"password":password})
 	db.commit()
 	return render_template("login.html")
-@app.route("/home",methods=["GET","POST"])
+@app.route("/search",methods=["GET","POST"])
 @login_required
-def index():
+def search():
 	if request.method=='POST':
-		search=request.form.get("search")
+		search=request.form.get("search").capitalize()
 		query=str('%'+search+'%')
 		books=db.execute("SELECT * FROM books WHERE isbn LIKE :query OR title LIKE :query OR author LIKE :query LIMIT 15",{"query":query}).fetchall()
 		if not books:
 			return render_template("error.html",message="Oops! We can't find books with that description")
 		return render_template("index.html",books=books,user=session["uname"])
 	return render_template("index.html",user=session["uname"])
+@app.route("/book/<isbn>")
+@login_required
+def book(isbn):
+	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
+	return render_template("book.html",book=book)

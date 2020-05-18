@@ -7,11 +7,10 @@ body{
   background-color: #1b1e26;
   list-style-type: none;
   margin: 0;
+  width:100%;
   padding: 0;
-  overflow: hidden;
-  
+  overflow: hidden; 
 }
-
 #hd{
   background-color: #1b1e26;
   margin:10px;
@@ -21,6 +20,19 @@ body{
   font-size: 18px;
   font-weight: bold;
   list-style-type: none
+}
+#logout,#Welcome{
+  float: right;
+  display: block;
+  margin: 10px;
+  padding: 14px 16px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none; 
+}
+#logout:hover {
+  background-color: #eb4034;
 }
 #search{
   padding: 10px;
@@ -35,16 +47,7 @@ body{
   width: 260px;
   position: relative;
 }
-#logout{
-  float: right;
-  display: block;
-  padding: 14px 16px;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-  text-decoration: none;
-  
-}
+
 .alert{
   width: 260px;
   margin: 5px auto;
@@ -55,19 +58,14 @@ body{
   font-size: 37px;
   font-weight: bold;
 }
-#Welcome{
-  padding: 14px 16px; 
-	float: right;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-  text-decoration: none;
+.row{
+  display: flex;
+  width: 70%;
+  padding: 10px;
 }
-
-#logout:hover {
-  background-color: #111;
+.column{
+  flex:50%;
 }
-
 .container{
     display: flex;
     flex-direction: row;
@@ -75,19 +73,3 @@ body{
     justify-content: space-around;
     align-items: baseline;
 }
-
-/*.container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.container > div{
-    border-radius: 25px;
-    border: 2px solid black;
-    color: white;
-    background-color: black;
-    font-size: 20px;
-    margin: 10px;
-    padding: 30px;
-    width: 300px;
-}*/

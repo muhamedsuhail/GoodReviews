@@ -10,9 +10,5 @@ def main():
 	for isbn,title,author,year in reader:
 		db.execute("INSERT INTO books (isbn,title,author,year) VALUES(:a,:b,:c,:d)",{"a":isbn,"b":title,"c":author,"d":year})
 		db.commit()
-	#Remove duplicate books
-	#SELECT title,COUNT(title) FROM books GROUP BY title HAVING COUNT(title)>1 ORDER BY title;
-	#DELETE  FROM books a USING books b WHERE a.id<b.id AND a.title=b.title;
-
 if __name__=="__main__":
 	main()

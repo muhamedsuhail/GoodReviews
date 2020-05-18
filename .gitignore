@@ -1,0 +1,5 @@
+#flask_Session temp folders
+
+flask_session/*
+ __pycache__/*
+ 

@@ -1,0 +1,23 @@
+{%extends "layout.html"%}
+{%block title%}
+	Dashboard
+{%endblock%}
+{%block head%}
+<ul class="topnav">
+	<li id="hd">Project 1: Books</li>
+	<li><a href="/" id="logout"><strong>Logout</strong></a></li>
+	<li><a href="/search" id="logout"><strong>Search</strong></a></li>
+	<li id="Welcome">{{user}}</li>
+</ul> 
+{%endblock%}
+{%block body%}
+	<div class="row">
+		<div class="column"><img style="padding: 30px;margin:30px;"src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg"/></div>
+		<div class="column">
+			<h2><strong>{{book.title}}</strong></h2>
+			<h3>Author : {{book.author}}</h3>
+			<h4>Published : {{book.year}}</h4>
+			<h4>ISBN - {{book.isbn}}</h4>
+		</div>
+	</div>
+{%endblock%}

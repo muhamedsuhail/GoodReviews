@@ -5,16 +5,19 @@
 {%block head%}
 <ul class="topnav">
 	<li id="hd">Project 1: Books</li>
-	<li><a href="/" id="logout">Logout</a></li>
+	<li><a href="/" id="logout"><strong>Logout</strong></a></li>
 	<li id="Welcome">{{user}}</li>
 </ul> 
 {%endblock%}
 {%block body%}
 
 
-	<div id= "search" class="form-group">
-		<form action="{{url_for('index')}}" method="post">
+	<div  id= "search"  class="form-group">
+		<form action="{{url_for('search')}}" method="post">
 			<input type="text" name="search" placeholder="Search..">
+			<div style="text-align:center;padding: 10px;">
+				<button type="submit" class="btn btn-danger">Search</button>
+			</div>
 		</form>
 	</div>
 	<div class="container">
@@ -25,8 +28,10 @@
 			    <h7 class="card-title">{{book.isbn}}</h7>
 			    <h5 class="card-title">{{book.author}}</h5>
 			    <p class="card-text">{{book.year}}</p>
+			    <a href="book/{{book.isbn}}" class="btn btn-danger">More details</a>
 			  </div>
 			</div>
+
 		{%endfor%}
 	</div>
 {%endblock%}
