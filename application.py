@@ -1,5 +1,5 @@
 import os
-import requests
+
 from flask import Flask, session,render_template,request,redirect,flash
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -74,16 +74,8 @@ def search():
 			return render_template("error.html",message="Oops! We can't find books with that description")
 		return render_template("index.html",books=books,user=session["uname"])
 	return render_template("index.html",user=session["uname"])
-@app.route("/book/<isbn>",methods=["GET","POST"])
+@app.route("/book/<isbn>")
 @login_required
 def book(isbn):
-	if request.method=='POST':
-		rating=request.form.get('rating')
-		review=request.form.get('review')
-	else:
-		rating=None
-		review=None
 	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
-	key=os.getenv("GOOD_READS_KEY")
-	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
-	return render_template("book.html",book=book,res=res,reviews=review)
+	return render_template("book.html",book=book)

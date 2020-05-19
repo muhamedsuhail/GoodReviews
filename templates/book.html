@@ -12,42 +12,12 @@
 {%endblock%}
 {%block body%}
 	<div class="row">
-		<div id="column" class="col-xs-2 col-md-3">
-			<img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg"/>
+		<div class="column"><img style="padding: 30px;margin:30px;"src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-L.jpg"/></div>
+		<div class="column">
+			<h2><strong>{{book.title}}</strong></h2>
+			<h3>Author : {{book.author}}</h3>
+			<h4>Published : {{book.year}}</h4>
+			<h4>ISBN - {{book.isbn}}</h4>
 		</div>
-	  	<div  id="column" class="col-xs-2 col-md-3">
-	  		<h3><strong>{{book.title}}</strong></h3>
-			<h4>Author : {{book.author}}</h4>
-			<h5>Published : {{book.year}}</h5>
-			<h5>ISBN - {{book.isbn}}</h5>
-	  	</div>
-	  	<div id="column" class="col-xs-2 col-md-3">
-	  		<img style="width: 25vh;height: 5vh"src="{{url_for('static',filename='goodreads.jpg')}}"/>
-	  		<h5>No of ratings:	{{res.json()['books'][0]['work_ratings_count']}}</h5>
-	  		<h5>Average rating: {{res.json()['books'][0]['average_rating']}}</h5>
-	  	</div>
 	</div>
-	<div class="dropdown-divider"></div>
-	<div class="form-group">
-		<form method="post">
-			<select name="rating">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-			<input type="text" name="review">
-			<button class="btn btn-danger">Submit Review!</button>
-
-		</form>
-	</div>
-	<ul>
-	{%if reviews%}
-		{%for review in reviews%}
-			<li>{{review}}</li>
-		{%endfor%}
-	{%else%}
-		<li>No reviews</li>
-	{%endif%}
 {%endblock%}

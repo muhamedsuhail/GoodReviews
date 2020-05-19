@@ -7,21 +7,15 @@
 	<li id="hd">Project 1: Books</li>
 	<li><a href="/" id="logout"><strong>Logout</strong></a></li>
 	<li id="Welcome">{{user}}</li>
-</ul>
+</ul> 
 {%endblock%}
 {%block body%}
+
+
 	<div  id= "search"  class="form-group">
-		<!-- <div class="container1">
-			<input type="radio" name="box">Search by ISBN</><br><br>
-			<input type="radio" name="box">Search by Title</><br><br>
-			<input type="radio" name="box">Search by Author</><br><br>
-		</div> -->
 		<form action="{{url_for('search')}}" method="post">
-			<div style="text-align:center;padding: 10px">
-				<input type="text" name="search" placeholder="Search..">
-				<small>Search book by ISBN,Author,Title</small>
-			</div>
-			<div style="text-align:center;padding: 10px">
+			<input type="text" name="search" placeholder="Search..">
+			<div style="text-align:center;padding: 10px;">
 				<button type="submit" class="btn btn-danger">Search</button>
 			</div>
 		</form>
