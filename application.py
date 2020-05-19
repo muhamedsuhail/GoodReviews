@@ -1,4 +1,6 @@
 import os
+import datetime
+import calendar
 import requests
 from flask import Flask, session,render_template,request,redirect,flash
 from flask_session import Session
@@ -78,12 +80,15 @@ def search():
 @login_required
 def book(isbn):
 	if request.method=='POST':
-		rating=request.form.get('rating')
+		rating=int(request.form.get('rating'))
 		review=request.form.get('review')
-	else:
-		rating=None
-		review=None
+		time=datetime.datetime.now().month
+		print(calendar.month_name[time])
+		id=db.execute("SELECT id from books WHERE isbn=:id",{"id":isbn}).fetchone()[0]
+		# db.execute("INSERT INTO reviews(username,book_id,rating,review,time) VALUES(:uname,:id,:rtg,:rev,:tm)",{"uname":session["uname"],"id":id,"rtg":rating,"rev":review,"tm":time})
+		# db.commit()
 	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
+	review=db.execute("SELECT * FROM reviews WHERE id=:id",{"id":book.id}).fetchall()
 	key=os.getenv("GOOD_READS_KEY")
 	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
 	return render_template("book.html",book=book,res=res,reviews=review)

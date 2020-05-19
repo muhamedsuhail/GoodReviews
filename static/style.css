@@ -6,7 +6,7 @@ body{
 @media (max-width:500px)
 {
   *{
-    overflow: hidden;
+    overflow-x: hidden;
   }
 }
 .topnav 
@@ -71,7 +71,11 @@ text-decoration: none;
   flex-direction: row;
   padding: 30px;
 }
-.dropdown-divider
+.form-control{
+  display: inline-block;
+  width: auto;
+}
+.dropdown-divider,.form-row
 {
   margin:auto;
   width: 70vw;
