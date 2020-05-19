@@ -5,6 +5,6 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("uname") is None:
-            return redirect("/")
+            return render_template("warning.html")
         return f(*args, **kwargs)
     return decorated_function
