@@ -26,6 +26,7 @@
 	  		<img style="width: 25vh;height: 5vh"src="{{url_for('static',filename='goodreads.jpg')}}"/>
 	  		<h5>No of ratings:	{{res.json()['books'][0]['work_ratings_count']}}</h5>
 	  		<h5>Average rating: {{res.json()['books'][0]['average_rating']}}</h5>
+	  		<a href="https://www.goodreads.com/book/isbn/{{book.isbn}}" >Goodreads book page</a>
 	  	</div>
 	</div>
 	<div class="dropdown-divider"></div><br>
@@ -66,7 +67,7 @@
 							<h5 class="card-title">{{review.username}}</h5>
 							<h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
 							<p  style="text-align:center" class="card-text">{{review.review}}</p>
-							<h5 class="card-text">Rating:{{review.rating}}</h5>
+							<h5 class="card-text">Rating: {{review.rating}}</h5>
 						</div>
 				</div>
 	{%endfor%}
