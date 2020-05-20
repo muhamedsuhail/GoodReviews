@@ -1,6 +1,12 @@
 #flask_Session temp folders
 
 flask_session/*
- __pycache__/*
-
+__pycache__/*
 .idea/*
+
+#Files for updating database
+/users.py
+/reviews.py
+/users.csv
+/reviews.csv
+
