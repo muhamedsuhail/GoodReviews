@@ -3,7 +3,7 @@ import datetime
 import arrow
 from passlib.hash import sha256_crypt
 import requests
-from flask import Flask, session,render_template,request,redirect,flash
+from flask import Flask, session,render_template,request,redirect,flash,jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -82,11 +82,6 @@ def search():
 def book(isbn):
 	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
 	review=db.execute("SELECT username,rating,review,to_char(time, 'DD Mon YYYY - HH24:MI:SS') as time FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
-	# time=db.execute("SELECT time FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
-	# if time:
-	# 	for x in range(len(time)):
-	# 		print(time[x][0])
-	# 		t=arrow.get(time[x][0]).to('Asia/Kolkata').format('HH:mm DD-MM-YYYY ')
 	key=os.getenv("GOOD_READS_KEY")
 	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
 	if request.method=='POST':
@@ -100,3 +95,13 @@ def book(isbn):
 		db.commit()
 		return redirect("/book/"+isbn)
 	return render_template("book.html",book=book,res=res,reviews=review,user=session["uname"])
+@app.route("/api/<isbn>")
+def api_req(isbn):
+	book=db.execute("SELECT title,author,year,isbn,COUNT(reviews.id) as review_count,AVG(reviews.rating) as average_score FROM books INNER JOIN reviews ON books.id=reviews.book_id WHERE isbn=:id GROUP BY title,author,year,isbn",{"id":isbn}).fetchone()
+	if book is None:
+		return jsonify({"Error": "Invalid ISBN"}),422
+	info=dict(book.items())
+	info['average_score']=float('%.2f'%(info['average_score']))
+	return jsonify(info)
+
+	

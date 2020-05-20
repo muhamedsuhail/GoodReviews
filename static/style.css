@@ -82,14 +82,6 @@ text-decoration: none;
   width: 70vw;
   align-items: center;
 }
-/*.comment-container
-{
-  align-items: center;
-  width: 70vw;  
-  justify-content: space-around;
-  color: red;
-}
-*/
 .flexbox-cols{
   display: flex;
   flex-direction:column;
@@ -107,19 +99,6 @@ text-decoration: none;
   height: 20vh ;
   background-color: #292f40;
 }
-/*.flexbox-cols{
-  display: flex;
-
-}
-.flexbox-cols .col1,.flexbox-cols .col2,.flexbox-cols .col3{
-  flex:3;
-  width: 70vw;  
-  background: black;
-  margin-right: 16px;
-}
-.flexbox-cols .col3{
-  margin-right: 0;
-}*/
 .container{
   display: flex;
   flex-direction: row;
