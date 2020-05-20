@@ -9,6 +9,7 @@
 	<li><a href="/search" id="logout"><strong>Search</strong></a></li>
 	<li id="Welcome">{{user}}</li>
 </ul> 
+
 {%endblock%}
 {%block body%}
 	<div class="row">
@@ -59,9 +60,18 @@
 	<ul>
 	{%if reviews%}
 	{%for review in reviews%}
-			<li>{{review.review}},{{review.rating}},{{review.time}},{review.username}</li>
-	{%else%}
-		<li>No reviews</li>
+	<div class="comment-container">
+		<div class="col-xs-6 col-md-12">
+			<div class="card" style="width: 18rem;">
+				  <div class="card-body">
+				    <h5 class="card-title">{{review.username}}</h5>
+				    <h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
+				    <p class="card-text">{{review.review}}</p>
+				    <h5 class="card-text">{{review.rating}}</h5>
+				  </div>
+			</div>
+		</div>
+	</div>
 	{%endfor%}
 	{%endif%}
 {%endblock%}

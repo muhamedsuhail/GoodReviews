@@ -79,16 +79,19 @@ def search():
 @app.route("/book/<isbn>",methods=["GET","POST"])
 @login_required
 def book(isbn):
+	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
+	review=db.execute("SELECT * FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
+	print(review)
+	key=os.getenv("GOOD_READS_KEY")
+	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
 	if request.method=='POST':
 		rating=int(request.form.get('rating'))
 		review=request.form.get('review')
-		time=datetime.datetime.now().month
-		print(calendar.month_name[time])
 		id=db.execute("SELECT id from books WHERE isbn=:id",{"id":isbn}).fetchone()[0]
-		# db.execute("INSERT INTO reviews(username,book_id,rating,review,time) VALUES(:uname,:id,:rtg,:rev,:tm)",{"uname":session["uname"],"id":id,"rtg":rating,"rev":review,"tm":time})
-		# db.commit()
-	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
-	review=db.execute("SELECT * FROM reviews WHERE id=:id",{"id":book.id}).fetchall()
-	key=os.getenv("GOOD_READS_KEY")
-	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
+		if db.execute("SELECT * FROM reviews WHERE username=:uname AND book_id=:id",{"uname":session["uname"],"id":id}).rowcount!=0:
+			flash("You have aldready submitted a review",'warning')
+			return	redirect("/book/"+isbn)
+		db.execute("INSERT INTO reviews(username,book_id,rating,review) VALUES(:uname,:id,:rtg,:rev)",{"uname":session["uname"],"id":id,"rtg":rating,"rev":review})
+		db.commit()
+		return redirect("/book/"+isbn)
 	return render_template("book.html",book=book,res=res,reviews=review)

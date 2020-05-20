@@ -81,6 +81,15 @@ text-decoration: none;
   width: 70vw;
   align-items: center;
 }
+.comment-container
+{
+  width: 70vw;  
+  justify-content: space-around;
+  color: red;
+}
+.card{
+  width: 70vw;
+}
 .container{
   display: flex;
   flex-direction: row;
