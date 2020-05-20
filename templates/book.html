@@ -1,6 +1,6 @@
 {%extends "layout.html"%}
 {%block title%}
-	Dashboard
+	Book page
 {%endblock%}
 {%block head%}
 <ul class="topnav">
@@ -30,8 +30,8 @@
 	  	</div>
 	</div>
 	<div class="dropdown-divider"></div><br>
-	<div style="width:70vw;text-align: center;"class="alert alert-danger" role="alert">
-  		<stong>User Reviews</stong>
+	<div style="width:70vw;text-align: center;font-weight: bold;"class="alert alert-info" role="alert">
+  		User Reviews
 	</div><br>
 	<form method="post">
         <div class="form-row" >
@@ -64,10 +64,10 @@
 	{%for review in reviews%}
 					<div id="comment"class="card border-dark mb-3" >
 						<div class="card-body">
-							<h5 class="card-title">{{review.username}}</h5>
+							<h5 class="card-title" style="font-weight: bold;">{{review.username}}</h5>
 							<h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
 							<p  style="text-align:center" class="card-text">{{review.review}}</p>
-							<h5 class="card-text">Rating: {{review.rating}}</h5>
+							<small class="card-text">Rating: {{review.rating}}</small>
 						</div>
 				</div>
 	{%endfor%}

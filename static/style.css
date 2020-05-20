@@ -19,7 +19,7 @@ body{
   overflow: hidden;
 }
 #hd{
-  background-color: #1b1e26;
+  /*background-color: #1b1e26;*/
   margin:10px;
   padding:10px;
   float: left;
@@ -92,12 +92,12 @@ text-decoration: none;
   width: 70vw;
   height: 20vh; 
   margin:auto;
-  color: red;
+  color: white;
 }
 #comment{
   width:  70vw;
   height: 20vh ;
-  background-color: #292f40;
+  background-color: #203052;
 }
 .container{
   display: flex;
