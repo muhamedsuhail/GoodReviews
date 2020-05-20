@@ -1,6 +1,7 @@
 import os
 import datetime
-import calendar
+import arrow
+from passlib.hash import sha256_crypt
 import requests
 from flask import Flask, session,render_template,request,redirect,flash
 from flask_session import Session
@@ -35,10 +36,10 @@ def login():
 		flash("Enter all the credentials",'danger')
 	#check for user 
 	if db.execute("SELECT password FROM users WHERE username=:username",{"username":name}).rowcount==0:
-		flash("Username not found")
+		flash("Invalid credentials",'danger')
 		return render_template("login.html")
-	passw=db.execute("SELECT password FROM users WHERE username=:uname",{"uname":name}).fetchone()
-	if password==passw[0]:
+	hpassw=db.execute("SELECT password FROM users WHERE username=:uname",{"uname":name}).fetchone()[0]
+	if sha256_crypt.verify(password,hpassw):
 		session["uname"]=name #login as user "name"
 		flash(f"Successfully logged in as {name}",'success')
 		return redirect("/search")
@@ -80,8 +81,12 @@ def search():
 @login_required
 def book(isbn):
 	book=db.execute("SELECT * FROM books WHERE isbn=:id",{"id":isbn}).fetchone()
-	review=db.execute("SELECT * FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
-	print(review)
+	review=db.execute("SELECT username,rating,review,to_char(time, 'DD Mon YYYY - HH24:MI:SS') as time FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
+	# time=db.execute("SELECT time FROM reviews WHERE book_id=:id",{"id":book.id}).fetchall()
+	# if time:
+	# 	for x in range(len(time)):
+	# 		print(time[x][0])
+	# 		t=arrow.get(time[x][0]).to('Asia/Kolkata').format('HH:mm DD-MM-YYYY ')
 	key=os.getenv("GOOD_READS_KEY")
 	res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns":isbn})
 	if request.method=='POST':
@@ -94,4 +99,4 @@ def book(isbn):
 		db.execute("INSERT INTO reviews(username,book_id,rating,review) VALUES(:uname,:id,:rtg,:rev)",{"uname":session["uname"],"id":id,"rtg":rating,"rev":review})
 		db.commit()
 		return redirect("/book/"+isbn)
-	return render_template("book.html",book=book,res=res,reviews=review)
+	return render_template("book.html",book=book,res=res,reviews=review,user=session["uname"])

@@ -57,21 +57,20 @@
             </div>
         </div>
     </form>
-	<ul>
+    <div class="category">
+			<div class="flexbox-cols">
 	{%if reviews%}
 	{%for review in reviews%}
-	<div class="comment-container">
-		<div class="col-xs-6 col-md-12">
-			<div class="card" style="width: 18rem;">
-				  <div class="card-body">
-				    <h5 class="card-title">{{review.username}}</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
-				    <p class="card-text">{{review.review}}</p>
-				    <h5 class="card-text">{{review.rating}}</h5>
-				  </div>
-			</div>
-		</div>
-	</div>
+					<div id="comment"class="card border-dark mb-3" >
+						<div class="card-body">
+							<h5 class="card-title">{{review.username}}</h5>
+							<h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
+							<p  style="text-align:center" class="card-text">{{review.review}}</p>
+							<h5 class="card-text">Rating:{{review.rating}}</h5>
+						</div>
+				</div>
 	{%endfor%}
 	{%endif%}
+	</div>
+		</div>
 {%endblock%}
