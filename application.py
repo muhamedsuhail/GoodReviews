@@ -101,7 +101,7 @@ def book(isbn):
 def api_req(isbn):
 	book=db.execute("SELECT title,author,year,isbn,COUNT(reviews.id) as review_count,AVG(reviews.rating) as average_score FROM books INNER JOIN reviews ON books.id=reviews.book_id WHERE isbn=:id GROUP BY title,author,year,isbn",{"id":isbn}).fetchone()
 	if book is None:
-		return jsonify({"Error": "Invalid ISBN"}),422
+		return jsonify({"Error": "Invalid ISBN"}),404
 	info=dict(book.items())
 	info['average_score']=float('%.2f'%(info['average_score']))
 	return jsonify(info)
