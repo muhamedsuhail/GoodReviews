@@ -93,22 +93,22 @@ text-decoration: none;
   .list-group{
   width:70vw;
   height: 20vh;
-}
-
+  }
 }
 @media (max-width: 500px)
 {
-  .list-group >div{
+  .list-group >div
+  {
   width:70vw;
   height: 20vh;
+  }
 }
 @media (max-height: 600px)
 {
   .list-group >div{
   width:70vw;
   height: 30vh;
-}
-
+  }
 }
 .container{
   display: flex;
