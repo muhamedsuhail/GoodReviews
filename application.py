@@ -63,9 +63,11 @@ def register():
 	if password!=rpassword:
 		flash("Passwords does not match",'warning')
 		return render_template("register.html")
-	db.execute("INSERT INTO users (username,password) VALUES(:name,:password)",{"name":name,"password":password})
+	hpass=sha256_crypt.encrypt(password)
+	db.execute("INSERT INTO users (username,password) VALUES(:name,:password)",{"name":name,"password":hpass})
 	db.commit()
-	return render_template("login.html")
+	flash("Successfully Registered!",'success')
+	return render_template("register.html")
 @app.route("/search",methods=["GET","POST"])
 @login_required
 def search():
