@@ -129,7 +129,7 @@ text-decoration: none;
 
 @media (max-height: 600px)
 {
-  .list-group >div
+  .list-group
   {
   width:70vw;
   height: 30vh;
