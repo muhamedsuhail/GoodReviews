@@ -19,7 +19,6 @@ body{
   overflow: hidden;
 }
 #hd{
-  /*background-color: #1b1e26;*/
   margin:10px;
   padding:10px;
   float: left;
@@ -76,28 +75,40 @@ text-decoration: none;
   display: inline-block;
   width: auto;
 }
-.dropdown-divider,.form-row
+.dropdown-divider,.form-row,.container
 {
   margin:auto;
   width: 70vw;
   align-items: center;
 }
-.flexbox-cols{
-  display: flex;
-  flex-direction:column;
-  align-items: center;
+.list-group > div
+{
+  color: white;
+  background-color: #203052;
+  margin: 10px;
+  padding: 10px;
+}
+@media (min-width: 500px)
+{
+  .list-group{
+  width:70vw;
+  height: 20vh;
 }
 
-.flexbox-cols > div{
-  width: 70vw;
-  height: 20vh; 
-  margin:auto;
-  color: white;
 }
-#comment{
-  width:  70vw;
-  height: 20vh ;
-  background-color: #203052;
+@media (max-width: 500px)
+{
+  .list-group >div{
+  width:70vw;
+  height: 20vh;
+}
+@media (max-height: 600px)
+{
+  .list-group >div{
+  width:70vw;
+  height: 30vh;
+}
+
 }
 .container{
   display: flex;

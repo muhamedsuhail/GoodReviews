@@ -58,20 +58,19 @@
             </div>
         </div>
     </form>
-    <div class="category">
-			<div class="flexbox-cols">
+    <div class="container" style="align-items: center;justify-content: center;align-content: center;">
+			<div class="list-group">
 	{%if reviews%}
 	{%for review in reviews%}
-					<div id="comment"class="card border-dark mb-3" >
-						<div class="card-body">
-							<h5 class="card-title" style="font-weight: bold;">{{review.username}}</h5>
-							<h6 class="card-subtitle mb-2 text-muted">{{review.time}}</h6>
-							<p  style="text-align:center" class="card-text">{{review.review}}</p>
-							<small class="card-text">Rating: {{review.rating}}</small>
-						</div>
-				</div>
+				<div class="list-group-item d-flex justify-content-between  card border-dark mb-3">
+			      <h5 style="font-weight: bold;">{{review.username}}</h5>
+			      <small class="mb-2 text-muted">{{review.time}}</small>
+			      <p style="text-align: center;">{{review.review}}</p>
+			      <small>Rating: {{review.rating}}</small>
+
+			    </div><br>
 	{%endfor%}
 	{%endif%}
 	</div>
-		</div>
+	</div>
 {%endblock%}
