@@ -4,3 +4,5 @@
 *.py linguist-detectable=true
 *.css linguist-detectable=true
 *.html linguist-detectable=true
+
+application.py -linguist-detectable
