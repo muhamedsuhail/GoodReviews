@@ -1,9 +1,9 @@
-##CS50W Project 1
+## CS50W Project 1
 
-#Web Programming with Python and JavaScript
+# Web Programming with Python and JavaScript
 
-##Use the app on Heroku
-##https://cs50w-api-books.herokuapp.com/
+## Use the app on Heroku
+## https://cs50w-api-books.herokuapp.com/
 
 ## Usage:
 
