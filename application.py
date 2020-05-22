@@ -92,7 +92,7 @@ def register():
 	db.commit()
 
 	flash("Successfully Registered!",'success')
-	return render_template("register.html")
+	return redirect("/")
 
 @app.route("/search",methods=["GET","POST"])
 @login_required
@@ -155,19 +155,23 @@ def api_req(isbn):
 	#Api access
 
 	#Get book details from database...Get the average and Count of ratings and reviews
-	book=db.execute("SELECT title,author,year,isbn,COUNT(reviews.id) as review_count,AVG(reviews.rating) as average_score FROM books INNER JOIN reviews ON books.id=reviews.book_id WHERE isbn=:id GROUP BY title,author,year,isbn",{"id":isbn}).fetchone()
+	book=db.execute("SELECT id,title,author,year,isbn FROM books WHERE isbn=:id ",{"id":isbn}).fetchone()
+	review=db.execute("SELECT COUNT(id) as review_count,AVG(rating) as average_score FROM reviews WHERE book_id=:id",{"id":book.id}).fetchone()	
 
 	#Wrong ISBN- 404 Error
 
 	if book is None:
 		return jsonify({"Error": "Invalid ISBN"}),404
 
-	#Converting book items into json format
-	info=dict(book.items())
+	#Converting book items to json format
+	bk=dict(book.items())
+	rv=dict(review.items())
+	bk.update(rv)
 
 	#Rounding of the average score to 2 decimal places
-	info['average_score']=float('%.2f'%(info['average_score']))
+	if bk['average_score']!=None:
+		bk['average_score']=float('%.2f'%(bk['average_score']))
 	
-	return jsonify(info)
+	return jsonify(bk)
 
 	
