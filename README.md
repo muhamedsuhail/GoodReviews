@@ -7,7 +7,6 @@
 
 ## Usage:
 
-* Register
-* Login
+* Register & Login
 * Search books by name, author or ISBN
 * Get info about a book and submit your own review!
