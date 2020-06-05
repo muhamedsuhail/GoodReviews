@@ -156,12 +156,14 @@ def api_req(isbn):
 
 	#Get book details from database...Get the average and Count of ratings and reviews
 	book=db.execute("SELECT id,title,author,year,isbn FROM books WHERE isbn=:id ",{"id":isbn}).fetchone()
-	review=db.execute("SELECT COUNT(id) as review_count,AVG(rating) as average_score FROM reviews WHERE book_id=:id",{"id":book.id}).fetchone()	
 
 	#Wrong ISBN- 404 Error
 
 	if book is None:
 		return jsonify({"Error": "Invalid ISBN"}),404
+
+
+	review=db.execute("SELECT COUNT(id) as review_count,AVG(rating) as average_score FROM reviews WHERE book_id=:id",{"id":book.id}).fetchone()	
 
 	#Converting book items to json format
 	bk=dict(book.items())
