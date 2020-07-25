@@ -12,8 +12,8 @@ from login import *
 app = Flask(__name__)
 
 #Check for environment variable
-if not "postgres://qsfiaphzyrmsbm:d5fc6c9d9dcda8fa08e0b4fe70cd8546300b41a9a78f35263875407086c225ed@ec2-18-215-99-63.compute-1.amazonaws.com:5432/d59irftjbknjb0":
-    raise RuntimeError("DATABASE_URL is not set")
+if not "postgres://teyayfrbjlhjdi:7e93c8a63c0d398fe344649b19a7aa8d4e6530a2c618f24db13fdf38e8346846@ec2-35-173-94-156.compute-1.amazonaws.com:5432/d29dns5h3o57tg":
+    raise RuntimeError("DATABASE_URI is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -21,7 +21,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine("postgres://qsfiaphzyrmsbm:d5fc6c9d9dcda8fa08e0b4fe70cd8546300b41a9a78f35263875407086c225ed@ec2-18-215-99-63.compute-1.amazonaws.com:5432/d59irftjbknjb0")
+engine = create_engine("postgres://teyayfrbjlhjdi:7e93c8a63c0d398fe344649b19a7aa8d4e6530a2c618f24db13fdf38e8346846@ec2-35-173-94-156.compute-1.amazonaws.com:5432/d29dns5h3o57tg")
 db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/",methods=["GET","POST"])
