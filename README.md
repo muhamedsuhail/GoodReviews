@@ -16,11 +16,11 @@ A Book Review Website for posting reviews on books.
 
 ## Book Page
 
-![Book_page](https://github.com/muhamedsuhail/GoodReviews/blob/master/Screenshots/BookListing.png?raw=true)
+![Book_page](https://github.com/muhamedsuhail/GoodReviews/blob/master/Screenshots/BookPage.png?raw=true)
 
 ## Api Page
 
-![Api_page](https://github.com/muhamedsuhail/GoodReviews/blob/master/Screenshots/BookListing.png?raw=true)
+![Api_page](https://github.com/muhamedsuhail/GoodReviews/blob/master/Screenshots/ApiPage.png?raw=true)
 
 ## Usage:
 
